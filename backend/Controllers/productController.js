@@ -26,7 +26,7 @@ const  createProduct = asyncHnadler(async (req,res) => {
         let uploadedFile;
         try {
             uploadedFile = await cloudinary.uploader.upload(req.file.path,{
-                folder:"ShyApp1",
+                folder:"FarmLink",
                 resource_type:"image",
             })
         } catch (error) {
@@ -50,6 +50,7 @@ const  createProduct = asyncHnadler(async (req,res) => {
 
     //Create prduct
     const product = await Product.create({
+       // user:req.user.id,
         name,
         sku,
         category,
