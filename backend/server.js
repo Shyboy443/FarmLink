@@ -1,7 +1,10 @@
 const express  = require("express")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv").config()
-
+const cors = require("cors");
+const userRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+const userManage = require("./routes/userManage");
 
 
 const PORT  = process.env.PORT || 2001;
@@ -13,6 +16,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL
 
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+app.use(cors());
 
 
 
@@ -22,7 +26,9 @@ app.use(express.urlencoded({extended:false}))
 
 
 //Routes
-
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use(userManage);
 
 //Conntect to mongoDB and Start the Server
 
