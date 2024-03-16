@@ -13,6 +13,6 @@ const offerSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
-const offer = mongoose.model("offer", offerSchema);
+const offer = mongoose.model("offer", offerSchema); 
 
 module.exports = offer;
