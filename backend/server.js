@@ -1,6 +1,7 @@
 const express  = require("express")
 const mongoose = require("mongoose")
 const dotenv = require("dotenv").config()
+const productRoute = require("./Routes/productRoute")
 
 
 
@@ -19,9 +20,13 @@ app.use(express.urlencoded({extended:false}))
 // Route Middleware
 
 
-
+app.use("/api/products",productRoute)
 
 //Routes
+
+app.get("/",(req,res)=>{
+    res.send("Home page")
+})
 
 
 //Conntect to mongoDB and Start the Server
