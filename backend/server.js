@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
+const cookieParser = require("cookie-parser")
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const userManage = require("./routes/userManage");
@@ -12,17 +13,20 @@ const app = express();
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // Middlewares
+app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 // Route Middleware
-app.use("/api/products", productRoute);
 
 // Routes from Profile_Management branch
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use(userManage);
+
+app.use("/api/products", productRoute);
+
 
 // Route from main branch
 app.get("/", (req, res) => {

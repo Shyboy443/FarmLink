@@ -9,7 +9,7 @@ const  createProduct = asyncHnadler(async (req,res) => {
 
     const {name,sku,category,quantity,price,description} = req.body
 
-
+    console.log(req.user._id);
     // Validation
     if(!name|| !category || !quantity || !price || !description ){
         res.status(400)
@@ -47,10 +47,11 @@ const  createProduct = asyncHnadler(async (req,res) => {
 
     }
 
+    console.log(req.user._id);
 
     //Create prduct
     const product = await Product.create({
-        user:req.user.id,
+        user:req.user._id,
         name,
         sku,
         category,
@@ -74,7 +75,7 @@ const getAllProduct = asyncHnadler(async (req,res) => {
 // Get All products 
 
 const getProduct = asyncHnadler(async (req,res) => {
-    const products = await Product.find({user:req.user.id}).sort("-createdAt") // getting error since user not created
+    const products = await Product.find({user:req.user._id}).sort("-createdAt") // getting error since user not created
     res.status(200).json(products)
  })
  
@@ -88,7 +89,7 @@ const getProduct = asyncHnadler(async (req,res) => {
          throw new Error("Product not found")
      }
      // match product to its user
-     if(product.user.toString() !== req.user.id){
+     if(product.user.toString() !== req.user._id){
          res.status(401)
          throw new Error("User Not authorized")
      }
@@ -110,7 +111,7 @@ const getProduct = asyncHnadler(async (req,res) => {
          throw new Error("Product not found")
      }
      // match product to its user
-     if(product.user.toString() !== req.user.id){
+     if(product.user.toString() !== req.user._id){
          res.status(401)
          throw new Error("User Not authorized")
      }
@@ -138,7 +139,7 @@ const getProduct = asyncHnadler(async (req,res) => {
  
      }
         // match product to its user
-        if(product.user.toString() !== req.user.id){
+        if(product.user.toString() !== req.user._id){
          res.status(401)
          throw new Error("User Not authorized")
      }
