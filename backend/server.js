@@ -1,37 +1,45 @@
-const express  = require("express")
-const mongoose = require("mongoose")
-const dotenv = require("dotenv").config()
+const express =require("express");
+const mongoose=require("mongoose");
+const bodyParser=require("body-parser");
+const cors =require("cors");
+const dotenv=require("dotenv");
+const app=express();
+require("dotenv").config();
 
 
-
-const PORT  = process.env.PORT || 2001;
-const app  = express()
-const FRONTEND_URL = process.env.FRONTEND_URL
-
-// Middlewares
-
-
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
-
-
-
-// Route Middleware
+const PORT=process.env.PORT || 2001;
 
 
 
 
-//Routes
+app.use(cors());
+app.use(bodyParser.json());
+
+const URL=process.env.MONGODB_URL;
 
 
-//Conntect to mongoDB and Start the Server
+mongoose.connect(URL,{
+
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    
+
+    
+});
+
+const connection= mongoose.connection;
+connection.once("open",() =>{
+    console.log("Mongodb Connection success");
+})
+
+const feedbackRouter=require("./routes/feedbacks.js");
+
+http://localhost:8040/feedback
+
+app.use("/feedback",feedbackRouter);
 
 
-mongoose
-        .connect(process.env.MONGO_URI)
-        .then(() =>{
-            app.listen(PORT,()=>{
-                console.log("Mongo DB Connected");
-                console.log(`Server Running on Port ${PORT}`);
-            })
-        })
+
+app.listen(PORT, () =>{
+    console.log(`Server is up and running on port number:${PORT} `)
+})
