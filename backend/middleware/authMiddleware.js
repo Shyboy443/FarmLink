@@ -51,4 +51,4 @@ const authenticate = (req, res, next) => {
     next();
   };
 
-  module.exports = authenticate , isAdmin, isBuyer, isFarmer, isDelivery, isExpert;
+  module.exports = { authenticate, isAdmin, isBuyer, isFarmer, isDelivery, isExpert };
