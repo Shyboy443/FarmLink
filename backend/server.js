@@ -16,7 +16,10 @@ const FRONTEND_URL = process.env.FRONTEND_URL;
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+    origin:["http://localhost:3000",`${FRONTEND_URL}`],
+    credentials: true,
+}));
 
 // Route Middleware
 

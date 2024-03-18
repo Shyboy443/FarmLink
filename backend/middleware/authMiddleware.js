@@ -1,3 +1,4 @@
+const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 
 
@@ -54,4 +55,26 @@ const authenticate = (req, res, next) => {
     next();
   };
 
-  module.exports = {authenticate , isAdmin, isBuyer, isFarmer, isDelivery, isExpert};
+
+
+  // ashen
+
+  const loginStatus = expressAsyncHandler(async (req, res) => {
+   
+    const token = req.cookies.authToken;
+    
+    if (!token) {
+        return res.json(false)
+    }
+    // Verify token
+
+    const verified = jwt.verify(token, process.env.JWTPRIVATEKEY)
+
+    if (verified) {
+        return res.json(true)
+    }
+    return res.json(false)
+});
+
+
+  module.exports = {loginStatus,authenticate , isAdmin, isBuyer, isFarmer, isDelivery, isExpert};

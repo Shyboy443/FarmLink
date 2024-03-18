@@ -9,7 +9,6 @@ const  createProduct = asyncHnadler(async (req,res) => {
 
     const {name,sku,category,quantity,price,description} = req.body
 
-    console.log(req.user._id);
     // Validation
     if(!name|| !category || !quantity || !price || !description ){
         res.status(400)
@@ -47,7 +46,7 @@ const  createProduct = asyncHnadler(async (req,res) => {
 
     }
 
-    console.log(req.user._id);
+    
 
     //Create prduct
     const product = await Product.create({
