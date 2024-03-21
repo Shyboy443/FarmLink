@@ -11,6 +11,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Layout from './components/layout/Layout';
 import Sidebar from './components/sidebar/Sidebar';
 import 'react-toastify/dist/ReactToastify.css';
+import EditProduct from './pages/editProduct/EditProduct';
 
 
 axios.defaults.withCredentials = true
@@ -52,6 +53,14 @@ function App() {
             <Sidebar>
               <Layout>
                 <AddProduct />
+              </Layout>
+            </Sidebar>
+          } />
+
+          <Route path="/edit-product" element={
+            <Sidebar>
+              <Layout>
+                <EditProduct />
               </Layout>
             </Sidebar>
           } />
