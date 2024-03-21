@@ -1,5 +1,11 @@
 .add-product {
+  
     margin-bottom: 5rem;
+    display: flex; /* Use flexbox to align children */
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically (optional, if you want vertical centering) */
+    height: 100%; /* Provide a height if you're using align-items to center vertically */
+
     .card {
       width: 100%;
       max-width: 500px;

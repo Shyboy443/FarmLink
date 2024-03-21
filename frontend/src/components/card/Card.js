@@ -1,4 +1,3 @@
-
 import styles from "./Card.module.scss"
 
 const card = ({children , cardClass}) => {

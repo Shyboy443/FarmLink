@@ -11,11 +11,11 @@ const {
 const { upload } = require("../Utills/fileupload");
 const { authenticate} = require('../middleware/authMiddleware');
 
-router.post("/", authenticate,upload.single("image"), createProduct);
-router.patch("/:id", authenticate, upload.single("image"), updateProduct);
-router.delete("/:id", authenticate,deleteProduct);
-router.get("/all", authenticate, getAllProduct);
+router.post("/",upload.single("image"), createProduct);
+router.patch("/:id", upload.single("image"), updateProduct);
+router.delete("/:id",deleteProduct);
+router.get("/all", getAllProduct);
 router.get("/",  getProduct);
-router.get("/:id", authenticate, getSingleProduct);
+router.get("/:id", getSingleProduct);
 
 module.exports = router;

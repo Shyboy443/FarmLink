@@ -23,6 +23,14 @@ const Loader = () => {
     </div>,
     document.getElementById("loader")
   );
+  
+}
+export const  SpinnerImg = () =>{
+  return(
+      <div className='--center-all'>
+          <img src={loaderImg} alt='Loading..'/>
+      </div>
+  )
 }
 
 export default Loader;

@@ -20,6 +20,7 @@ const getAllProducts = async () => {
 // Get All Products
 const getProducts = async () => {
   const response = await axios.get(`${BACKEND_URL}/api/products`);
+  console.log(response.data);
   return response.data;
   
 };

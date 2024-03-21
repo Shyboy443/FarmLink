@@ -30,11 +30,11 @@ const ProductList = ({ products, isLoading }) => {
         return text
     }
 
-   const delProduct =  async(id) => {
-    await dispatch(deleteProducts(id))
-    await dispatch(getProducts())
+    const delProduct = async (id) => {
+        await dispatch(deleteProducts(id))
+        await dispatch(getProducts())
 
-   } 
+    }
 
     const confirmDelete = (id) => {
 
@@ -48,7 +48,7 @@ const ProductList = ({ products, isLoading }) => {
                 },
                 {
                     label: 'Cancel',
-                  //  onClick: () => alert('Click No')
+                    //  onClick: () => alert('Click No')
                 }
             ]
         });
@@ -135,17 +135,17 @@ const ProductList = ({ products, isLoading }) => {
                                                 <td className='icons'>
                                                     <span>
                                                         <Link to={`/product-detail/${_id}`}>
-                                                        <AiOutlineEye size={25} color={"purple"} />
+                                                            <AiOutlineEye size={25} color={"purple"} />
                                                         </Link>
-                                                        
+
                                                     </span>
                                                     <span>
-                                                    <Link to={`/edit-product/${_id}`}>
-                                                        <FaEdit size={20} color={"green"} />
+                                                        <Link to={`/edit-product/${_id}`}>
+                                                            <FaEdit size={20} color={"green"} />
                                                         </Link>
                                                     </span>
                                                     <span>
-                                                        <FaTrashAlt size={20} color={"red"} onClick={ () => confirmDelete(_id)} />
+                                                        <FaTrashAlt size={20} color={"red"} onClick={() => confirmDelete(_id)} />
                                                     </span>
                                                 </td>
                                             </tr>

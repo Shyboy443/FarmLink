@@ -50,7 +50,7 @@ const  createProduct = asyncHnadler(async (req,res) => {
 
     //Create prduct
     const product = await Product.create({
-        user:req.user._id,
+        user:"65f7d317b701e302e5b40192",
         name,
         sku,
         category,
