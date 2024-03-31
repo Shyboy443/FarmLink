@@ -47,7 +47,9 @@ function App() {
           <Route path="/allpayments" element={
             <AllPayment/> 
           }/>
-          <Route path="/updatePayment/:id" element={<UpdatePayment />} />
+          <Route path="/updatePayment/:id" element={
+          <UpdatePayment />
+          } />
 
 
 
