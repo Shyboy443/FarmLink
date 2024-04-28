@@ -1,0 +1,20 @@
+.text-center {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 3.5rem; /* Keep the text large and readable */
+    font-weight: bold;
+    background-image: linear-gradient(120deg, #8BC34A 0%, #FFC107 90%);
+    -webkit-background-clip: text;
+    color: transparent; /* Necessary to see the gradient */
+    text-shadow: 0px 0px 2px rgba(0,0,0,0.1); /* More subtle shadow */
+    animation: text-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes text-glow {
+    from {
+      text-shadow: 0 0 1px #16a830, 0 0 1px #f6df4c; /* Reduced glow size and intensity */
+    }
+    to {
+      text-shadow: 0 0 2px #76801c, 0 0 1px #35a310; /* Reduced glow size and intensity */
+    }
+}
