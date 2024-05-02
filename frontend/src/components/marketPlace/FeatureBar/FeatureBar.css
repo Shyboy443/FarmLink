@@ -1,0 +1,52 @@
+/* FeatureBar.css */
+
+.feature-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.feature-bar h4 {
+    margin-left: 15rem;
+    font-size: 3rem;
+    color: #004a7c; /* Example color: dark blue for contrast */
+}
+
+.feature-items {
+    display: flex;
+    margin-right: 15rem;
+}
+
+.feature-item {
+    margin-right: 30px; /* Increased right margin for more space between items */
+    text-align: center;
+    flex: 1;  /* Optionally, makes each item take equal space in the container */
+}
+
+.feature-item p {
+    color: #333; /* Dark gray for text */
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.feature-item span {
+    display: block;
+    font-size: 0.85rem;
+    color: #666; /* Lighter gray for subtext */
+    margin-bottom: 12px; /* Added space between spans */
+    line-height: 1.5; /* Increased line height for better readability */
+}
+
+
+@media (max-width: 768px) {
+    .feature-items {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-item {
+        margin-right: 0;  /* Remove horizontal margin in smaller screens */
+        margin-bottom: 20px; /* Add vertical space between items on smaller screens */
+    }
+}

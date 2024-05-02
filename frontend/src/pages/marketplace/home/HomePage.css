@@ -1,0 +1,48 @@
+.text-center {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+  border-right: 2px solid #4CAF50; /* Simulating the cursor */
+  white-space: nowrap; /* Ensures the text stays in a single line */
+  overflow: hidden; /* Keeps the text hidden till it's "typed" */
+  width: 0; /* Start width, will expand during animation */
+  animation: typing 5s steps(60, end) forwards, blink-caret .75s step-end infinite;
+  /* Adjust your timing and steps based on the length of your text */
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: #000000 }
+}
+
+
+.homepage {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.text-center {
+  text-align: center;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  animation: typing 5s linear forwards, blink-caret .75s step-end infinite;
+}
+
+.section-content {
+  margin: 20px 0;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.108);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.feature-section, .recent-products, .special-offers, .top-selling, .top-sellers {
+  margin-bottom: 30px;
+}
