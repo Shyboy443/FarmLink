@@ -42,16 +42,16 @@ function App() {
 
 //  document.cookie = "authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWY3ZjU1YjQ4ZDE1OTEzYTQzZmVkZGEiLCJpYXQiOjE3MTM5MzA4OTIsImV4cCI6MTcxNDUzNTY5Mn0.JC8Ila_SlAQ_lgHCSl28z-JhcKl8WG8Fevg0pMC8CHg; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
 
-  const dispatch = useDispatch();
-  useEffect(() => {
-    async function loginStatus() {
-      const status = await getLoginStatus()
-      dispatch(SET_LOGIN(status))
-    }
-    loginStatus() 
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   async function loginStatus() {
+  //     const status = await getLoginStatus()
+  //     dispatch(SET_LOGIN(status))
+  //   }
+  //   loginStatus() 
   
-  }
-    , [dispatch])
+  // }
+  //   , [dispatch])
 
    
         
@@ -77,7 +77,9 @@ function App() {
                   <ProductAdminReport />
                 </Layout>
               </Sidebar>} />}
-            {user && user.role === "buyer" && <Route path="/*" element={<MarketHome />} />}
+            {user && user.role === "buyer" && <Route path="/*" element={ <MarketplaceNavbar showCategories={false}>
+                <MarketHome/>
+              </MarketplaceNavbar>} />}
             {user && user.role === "farmer" && <Route path="/*" element={
               <Sidebar>
                 <Layout>

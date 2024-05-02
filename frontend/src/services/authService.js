@@ -38,6 +38,7 @@ const getUserById = async (userId) => {
 };
 const authService = {
     getUserById,
+    getLoginStatus
 }
 
 export default authService;

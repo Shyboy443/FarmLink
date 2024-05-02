@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  deleteProductsByUserId,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -31,5 +32,9 @@ router.delete('/products/deleteall', authenticate,deleteAllProducts);
 router.get('/user-products/:id',authenticate,getProductsById);
 router.post('/send-notification-email', authenticate,sendNotificationEmail);
 router.get('/report/generate', generateAndDownloadReport);
+router.delete('/deleteProductsByUser/:id', deleteProductsByUserId);
+
+
+
 
 module.exports = router;

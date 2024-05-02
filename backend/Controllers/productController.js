@@ -308,6 +308,22 @@ const generateAndDownloadReport = asyncHnadler(async (req, res) => {
     }
 });
 
+// Delete products by user ID
+
+const deleteProductsByUserId = asyncHnadler(async (req, res) => {
+    const userId = req.params.id;  // Assuming you pass the user ID as a URL parameter
+
+    // Attempt to delete products
+    const result = await Product.deleteMany({ user: userId });
+    
+    if (result.deletedCount === 0) {
+        res.status(404).json({ message: "No products found for the given user." });
+    } else {
+        res.status(200).json({ message: `Deleted ${result.deletedCount} products.` });
+    }
+});
+
+
 
 
  module.exports = {
@@ -323,7 +339,8 @@ const generateAndDownloadReport = asyncHnadler(async (req, res) => {
      deleteAllProducts,
      getProductsById,
      sendNotificationEmail,
-     generateAndDownloadReport
+     generateAndDownloadReport,
+     deleteProductsByUserId,
     
  }
 
