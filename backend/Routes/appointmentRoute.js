@@ -1,4 +1,3 @@
-// appointmentRoute.js
 const express = require('express');
 const router = express.Router();
 const Appointment = require('../Models/appointmentModel');
@@ -7,112 +6,112 @@ const nodemailer = require('nodemailer');
 
 // Function to send appointment confirmation email to the expert
 async function sendAppointmentEmailToExpert(expertEmail, subject, body) {
-    try {
-      // Create a nodemailer transporter using your SMTP settings
-      let transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-          user: 'henryjhone10@gmail.com', // Your email
-          pass: 'zivr rjqh mxmt edsl', // Your password or app-specific password
-        },
-      });
-  
-      // Define email options
-      let mailOptions = {
-        from: 'henryjhone10@gmail.com',
-        to: expertEmail,
-        subject: subject,
-        html: body,
-      };
-  
-      // Send the email
-      let info = await transporter.sendMail(mailOptions);
-      console.log('Email sent to expert: ' + info.response);
-    } catch (error) {
-      console.error('Error sending appointment email to expert:', error);
-      throw error;
-    }
-  }
-  
-  // Route to send email
-  router.post('/send-email', async (req, res) => {
-    try {
-      const { expertId, subject, body } = req.body;
-      
-      // Retrieve expert email based on expertId
-      const expert = await Expertlist.findById(expertId);
-      if (!expert) {
-        return res.status(404).json({ error: 'Expert not found' });
-      }
-  
-      // Send email to expert
-      await sendAppointmentEmailToExpert(expert.email, subject, body);
-  
-      // Send success response
-      res.status(200).send("Email sent successfully");
-    } catch (error) {
-      console.error('Error sending email:', error);
-      res.status(500).json({ error: 'Error sending email' });
-    }
-  });
-
-  // Function to send appointment confirmation email to the user
-async function sendAppointmentConfirmationEmailToUser(userEmail, subject, body) {
   try {
-      // Create a nodemailer transporter using your SMTP settings
-      let transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 587,
-          secure: false, // true for 465, false for other ports
-          auth: {
-              user: 'henryjhone10@gmail.com', // Your email
-              pass: 'zivr rjqh mxmt edsl', // Your password or app-specific password
-          },
-      });
+    // Create a nodemailer transporter using your SMTP settings
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: 'henryjhone10@gmail.com', // Your email
+        pass: 'zivr rjqh mxmt edsl', // Your password or app-specific password
+      },
+    });
 
-      // Define email options
-      let mailOptions = {
-          from: 'henryjhone10@gmail.com',
-          to: userEmail,
-          subject: subject,
-          html: body,
-      };
+    // Define email options
+    let mailOptions = {
+      from: 'henryjhone10@gmail.com',
+      to: expertEmail,
+      subject: subject,
+      html: body,
+    };
 
-      // Send the email
-      let info = await transporter.sendMail(mailOptions);
-      console.log('Email sent to user: ' + info.response);
+    // Send the email
+    let info = await transporter.sendMail(mailOptions);
+    console.log('Email sent to expert: ' + info.response);
   } catch (error) {
-      console.error('Error sending appointment email to user:', error);
-      throw error;
+    console.error('Error sending appointment email to expert:', error);
+    throw error;
   }
 }
+
+// Function to send appointment confirmation email to the user
+async function sendAppointmentConfirmationEmailToUser(userEmail, subject, body) {
+  try {
+    // Create a nodemailer transporter using your SMTP settings
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: 'henryjhone10@gmail.com', // Your email
+        pass: 'zivr rjqh mxmt edsl', // Your password or app-specific password
+      },
+    });
+
+    // Define email options
+    let mailOptions = {
+      from: 'henryjhone10@gmail.com',
+      to: userEmail,
+      subject: subject,
+      html: body,
+    };
+
+    // Send the email
+    let info = await transporter.sendMail(mailOptions);
+    console.log('Email sent to user: ' + info.response);
+  } catch (error) {
+    console.error('Error sending appointment email to user:', error);
+    throw error;
+  }
+}
+
+// Route to send email
+router.post('/send-email', async (req, res) => {
+  try {
+    const { expertId, subject, body } = req.body;
+
+    // Retrieve expert email based on expertId
+    const expert = await Expertlist.findById(expertId);
+    if (!expert) {
+      return res.status(404).json({ error: 'Expert not found' });
+    }
+
+    // Send email to expert
+    await sendAppointmentEmailToExpert(expert.email, subject, body);
+
+    // Send success response
+    res.status(200).send("Email sent successfully");
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ error: 'Error sending email' });
+  }
+});
 
 // Route to accept an appointment by ID
 router.put('/accept/:id', async (req, res) => {
   try {
-      const appointment = await Appointment.findByIdAndUpdate(req.params.id, { status: 'Accepted' }, { new: true });
+    const appointment = await Appointment.findByIdAndUpdate(req.params.id, { status: 'Accepted' }, { new: true });
 
-      if (!appointment) {
-          return res.status(404).send({ error: 'Appointment not found' });
-      }
+    if (!appointment) {
+      return res.status(404).send({ error: 'Appointment not found' });
+    }
 
-      res.send(appointment);
+    res.send(appointment);
 
-      // Send email confirmation to the user
-      sendAppointmentConfirmationEmailToUser(appointment.email, 'Appointment Accepted', 'Your appointment has been accepted.');
+    // Send email confirmation to the user
+    sendAppointmentConfirmationEmailToUser(appointment.email, 'Appointment Accepted', 'Your appointment has been accepted.');
   } catch (error) {
-      res.status(400).send(error);
+    res.status(400).send(error);
   }
 });
-  
+
 // Create a new appointment
 router.post('/add', async (req, res) => {
   try {
     // Extract appointment details from the request body
     const { expertId, firstName, lastName, email, message, date, time } = req.body;
-    
+
     // Find the expert details based on the expertId
     const expert = await Expertlist.findById(expertId);
     if (!expert) {
@@ -148,7 +147,14 @@ router.post('/add', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const appointments = await Appointment.find();
-    res.send(appointments);
+
+    
+    const formattedAppointments = appointments.map(appointment => ({
+      ...appointment._doc,
+      date: appointment.date.toISOString().split('T')[0] 
+    }));
+
+    res.send(formattedAppointments);
   } catch (error) {
     res.status(500).send(error);
   }
@@ -161,7 +167,14 @@ router.get('/:id', async (req, res) => {
     if (!appointment) {
       return res.status(404).send();
     }
-    res.send(appointment);
+
+    
+    const formattedAppointment = {
+      ...appointment._doc,
+      date: appointment.date.toISOString().split('T')[0] 
+    };
+
+    res.send(formattedAppointment);
   } catch (error) {
     res.status(500).send(error);
   }
