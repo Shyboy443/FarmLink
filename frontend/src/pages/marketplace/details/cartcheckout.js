@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './cartcheckout.css';
-
+let userid;
 function CartCheckout() {
     const { cartId } = useParams();
     const [cart, setCart] = useState(null);
     const [totalWithDiscount, setTotalWithDiscount] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
+    const [total, setTotal] = useState(0);
     const [coupon, setCoupon] = useState('');
     const [showModal, setShowModal] = useState(false);
     const shippingPrice = 10; // Hardcoded shipping price
@@ -15,6 +16,7 @@ function CartCheckout() {
 
     useEffect(() => {
         const fetchCartDetails = async () => {
+            userid = localStorage.getItem('userId');
             try {
                 const response = await axios.get(`http://localhost:5000/api/cart/get/${cartId}`);
                 setCart(response.data);
@@ -26,19 +28,21 @@ function CartCheckout() {
 
         fetchCartDetails();
     }, [cartId]);
-
+    //console.log(userid);
     const calculateTotal = (cartData) => {
         let total = 0;
         let itemsCount = 0;
         cartData.items.forEach((item) => {
             total += item.amount;
             itemsCount += item.quantity;
+            
         });
-
+        //console.log(total);
         const totalWithDiscount = total - discountAmount + shippingPrice;
 
         setTotalWithDiscount(totalWithDiscount);
         setTotalItems(itemsCount);
+        setTotal(total);
     };
 
     const handleCouponChange = (event) => {
@@ -51,9 +55,9 @@ function CartCheckout() {
 
     const placeOrder = async () => {
         try {
-            const userId = '662759a45804d5fceb0ee1cc';
+            //const userId = '662759a45804d5fceb0ee1cc';
             const orderData = {
-                customer: userId,
+                customer: userid,
                 purchasedItems: cart.items.map(item => ({
                     product: item.product,
                     name: item.productName,
@@ -105,17 +109,17 @@ function CartCheckout() {
                             </div>
                             <form className="class21">
                             <span>Cardholder's name:</span>
-<input className="input21-cart" placeholder="Linda Williams"/>
-<br/><span>Card Number:</span>
-<input className="input21-cart" placeholder="0125 6780 4567 9909"/>
-<div className="row">
-    <div className="col-4"><span>Expiry date:</span>
-        <input className="input21-cart" placeholder="YY/MM"/>
-    </div>
-    <div className="col-4"><span>CVV:</span>
-        <input id="cvv" className="input21-cart"/>
-    </div>
-</div>
+                                <input className="input21-cart" placeholder="Linda Williams"/>
+                            <br/><span>Card Number:</span>
+                                <input className="input21-cart" placeholder="0125 6780 4567 9909"/>
+                            <div className="row">
+                            <div className="col-4"><span>Expiry date:</span>
+                                <input className="input21-cart" placeholder="YY/MM"/>
+                            </div>
+                            <div className="col-4"><span>CVV:</span>
+                                <input id="cvv" className="input21-cart"/>
+                                </div>
+                            </div>
                                 
                             </form>
                         </div>                        
@@ -138,7 +142,7 @@ function CartCheckout() {
                             
                             <div className="row lower21">
                                 <div className="col text-left">Sub Total</div>
-                                <div className="col text-right">$ {totalWithDiscount.toFixed(2)}</div>
+                                <div className="col text-right">$ {total}</div>
                             </div>
                             <div className="row lower21">
                                 <div className="col text-left">Shipping</div>

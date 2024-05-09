@@ -4,13 +4,13 @@ const Order = require('../Models/Order');
 const nodemailer = require('nodemailer');
 
 // Create a transporter object using SMTP transport
-const transporter = nodemailer.createTransport({
+/*const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'dasunpriyanaveen@gmail.com',
         pass: 'uvxs twre aebt bbal',
     },
-});
+});*/
 
 // Define the function to generate a custom order ID
 function generateCustomOrderId() {
@@ -54,13 +54,13 @@ router.post("/add", async (req, res) => {
 
         const savedOrder = await newOrder.save();
 
-        // Send email notification
+       /* // Send email notification
         await transporter.sendMail({
             from: 'dasunpriyanaveen@gmail.com',
             to: 'dasunpriyanaveen@gmail.com', // Change this to the customer's email
             subject: 'Order Confirmation',
             text: 'Your order has been successfully placed. Thank you for your purchase!',
-        });
+        });*/
 
         res.status(201).json({ message: "Order added successfully", order: savedOrder });
     } catch (error) {

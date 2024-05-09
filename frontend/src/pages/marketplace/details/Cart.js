@@ -70,11 +70,25 @@ function Cart() {
    
 
     if (error) {
-        return <div>Cart is empty.</div>;
+        return (<div className="card-body cart">
+        <div className="col-sm-12 empty-cart-cls text-center">
+        <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3"/>
+            <h3><strong>Your Cart is Empty</strong></h3>
+            <h4>Add something to make me happy :</h4>
+            <a href="/market" className="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+        </div>  
+        </div>);
     }
 
     if (!cart || cart.items.length === 0) {
-        return <div>Cart is empty.</div>;
+        return (<div className="card-body cart">
+        <div className="col-sm-12 empty-cart-cls text-center">
+        <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3"/>
+            <h3><strong>Your Cart is Empty</strong></h3>
+            <h4>Add something to make me happy :</h4>
+            <a href="/market" className="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+        </div>  
+        </div>);
     }
     return (
         <div className="check-card">
